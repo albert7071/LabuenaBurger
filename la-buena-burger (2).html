@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Buena Burger y Más – Melipilla</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --orange:    #E85002;
+  --orange2:   #F16001;
+  --orange3:   #D9C3AB;
+  --grad-dark: #000000;
+  --grad-mid:  #C10801;
+  --grad-end:  #F16001;
+  --black:     #000000;
+  --dark-gray: #333333;
+  --gray:      #646464;
+  --light-gray:#A7A7A7;
+  --white:     #F9F9F9;
+  --cream:     #FFF8F4;
+  --light-bg:  #FFFFFF;
+
+  --grad-brand: linear-gradient(135deg, #000000 0%, #C10801 40%, #F16001 75%, #D9C3AB 100%);
+  --grad-hero:  linear-gradient(160deg, #000000 0%, #1a0800 50%, #2d0e00 100%);
+  --grad-section: linear-gradient(135deg, #0d0d0d 0%, #1c0500 100%);
+  --grad-card:  linear-gradient(160deg, #1a1a1a 0%, #200800 100%);
+  --grad-btn:   linear-gradient(135deg, #E85002 0%, #F16001 100%);
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232,80,2,0.3);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 66px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.6rem; letter-spacing: 1px;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none; font-weight: 700;
+  font-size: 0.82rem; letter-spacing: 2.5px; text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--grad-btn); transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: var(--grad-btn);
+  color: white; font-weight: 900; font-size: 0.82rem;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 10px 22px; border-radius: 4px;
+  text-decoration: none; transition: opacity 0.2s, transform 0.15s;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ===== HERO ===== */
+#inicio {
+  min-height: 100vh;
+  background: var(--grad-hero);
+  display: flex; align-items: center;
+  padding: 120px 3rem 4rem;
+  position: relative; overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,80,2,0.18) 0%, rgba(193,8,1,0.08) 40%, transparent 70%);
+  top: 50%; right: -100px; transform: translateY(-50%);
+  pointer-events: none;
+}
+.hero-orb2 {
+  position: absolute;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(241,96,1,0.12) 0%, transparent 70%);
+  top: 10%; left: -50px;
+}
+
+.hero-stripe {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+  background: linear-gradient(160deg, transparent 0%, rgba(232,80,2,0.04) 100%);
+  border-left: 1px solid rgba(232,80,2,0.08);
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.hero-inner {
+  position: relative; max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; width: 100%;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,80,2,0.15);
+  border: 1px solid rgba(232,80,2,0.35);
+  color: var(--orange2); font-weight: 700;
+  font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 2px; margin-bottom: 2rem;
+}
+
+h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase;
+  line-height: 0.88; margin-bottom: 1.5rem;
+}
+h1 .l1 { font-size: clamp(2.5rem, 5vw, 4.5rem); color: rgba(255,255,255,0.55); letter-spacing: 3px; display: block; }
+h1 .l2 {
+  font-size: clamp(5rem, 12vw, 10rem); display: block; letter-spacing: -2px;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+h1 .l3 { font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); letter-spacing: 2px; display: block; }
+
+.hero-desc {
+  color: rgba(255,255,255,0.45); font-size: 1rem; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2.5rem;
+  max-width: 420px; line-height: 1.6;
+}
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-main {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--grad-btn); color: white;
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 16px 32px; border-radius: 4px; text-decoration: none;
+  border: none; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 30px rgba(232,80,2,0.35);
+}
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(232,80,2,0.5); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: var(--white);
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 15px 32px; border-radius: 4px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.btn-ghost:hover { border-color: var(--orange); background: rgba(232,80,2,0.08); transform: translateY(-2px); }
+
+.hero-right { display: flex; flex-direction: column; gap: 1rem; }
+.hero-badge-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(232,80,2,0.2);
+  border-radius: 8px; padding: 1.2rem 1.5rem;
+  text-align: center; min-width: 160px;
+  backdrop-filter: blur(8px);
+}
+.hero-badge-card .num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 2.5rem; letter-spacing: -1px;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block;
+}
+.hero-badge-card .lbl {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); display: block; margin-top: 4px;
+}
+
+/* ===== DIVIDER ===== */
+.grad-bar {
+  height: 3px;
+  background: var(--grad-brand);
+}
+
+/* ===== WHY US (white section) ===== */
+#por-que {
+  padding: 100px 3rem;
+  background: #FFFFFF;
+  position: relative;
+}
+.why-inner { max-width: 1140px; margin: 0 auto; }
+.why-label {
+  display: inline-block;
+  background: rgba(232,80,2,0.1); border: 1px solid rgba(232,80,2,0.3);
+  color: var(--orange); font-weight: 700;
+  font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 2px; margin-bottom: 0.8rem;
+}
+.why-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -1px; line-height: 1;
+  color: #111111;
+  margin-bottom: 1rem;
+}
+.why-title span {
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.why-sub {
+  color: #777; font-size: 1rem; max-width: 500px; line-height: 1.7; margin-bottom: 3.5rem;
+}
+.why-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;
+}
+.why-card {
+  background: #fff;
+  border: 1px solid #f0e8e0;
+  border-radius: 12px; padding: 2rem 1.8rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.why-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(232,80,2,0.12); }
+.why-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+.why-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.3rem; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #111; margin-bottom: 0.5rem;
+}
+.why-card-desc { color: #888; font-size: 0.88rem; line-height: 1.6; }
+
+/* ===== MENU ===== */
+#menu {
+  padding: 110px 3rem;
+  background: var(--grad-section);
+  position: relative;
+}
+#menu::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(232,80,2,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sec-wrap { max-width: 1140px; margin: 0 auto; }
+
+.sec-head { text-align: center; margin-bottom: 3.5rem; }
+.sec-label {
+  display: inline-block;
+  background: rgba(232,80,2,0.15); border: 1px solid rgba(232,80,2,0.3);
+  color: var(--orange2); font-weight: 700;
+  font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 2px; margin-bottom: 0.8rem;
+}
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase;
+  font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -1px; line-height: 1;
+  background: linear-gradient(135deg, #ffffff 0%, #E85002 60%, #F16001 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+
+.menu-card {
+  background: var(--grad-card);
+  border: 1px solid rgba(232,80,2,0.18);
+  border-radius: 8px; overflow: hidden;
+  transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.menu-card:hover {
+  border-color: rgba(232,80,2,0.55);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 50px rgba(232,80,2,0.15);
+}
+
+.card-top {
+  background: linear-gradient(135deg, #1a0800 0%, #2d0e00 100%);
+  border-bottom: 1px solid rgba(232,80,2,0.25);
+  padding: 1.2rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-top h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.card-top-icon { font-size: 1.8rem; }
+
+.card-body { padding: 1.2rem 1.5rem; }
+
+.item {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06); gap: 14px;
+}
+.item:last-child { border: none; padding-bottom: 0; }
+.item-name { font-weight: 700; font-size: 0.93rem; color: var(--white); }
+.item-desc { font-size: 0.78rem; color: rgba(255,255,255,0.38); margin-top: 3px; font-weight: 400; line-height: 1.4; }
+.item-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.25rem; white-space: nowrap;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hot {
+  display: inline-block;
+  background: linear-gradient(135deg, #C10801, #F16001);
+  color: white; font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; margin-left: 7px; vertical-align: middle;
+}
+
+.menu-footer { text-align: center; margin-top: 2.5rem; }
+.menu-note { color: rgba(255,255,255,0.28); font-size: 0.82rem; margin-bottom: 1.2rem; }
+
+/* ===== GALLERY (white) ===== */
+#galeria {
+  padding: 110px 3rem;
+  background: #FFFFFF;
+  position: relative; overflow: hidden;
+}
+#galeria::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(232,80,2,0.04) 0%, transparent 60%);
+}
+
+/* Override sec-title for white sections */
+#galeria .sec-title,
+#galeria .sec-label {
+  background: linear-gradient(135deg, #111 0%, #E85002 60%, #F16001 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#galeria .sec-label {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--orange);
+  background-color: rgba(232,80,2,0.08);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 210px 210px;
+  gap: 12px; max-width: 1000px; margin: 3rem auto 0;
+}
+
+.g-item {
+  background: linear-gradient(135deg, #f5ede6 0%, #fde8d8 100%);
+  border: 1px solid rgba(232,80,2,0.15);
+  border-radius: 6px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.g-item:hover { border-color: var(--orange); transform: scale(1.01); }
+.g-item.big { grid-column: span 2; grid-row: span 2; font-size: 6rem; }
+
+.g-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(232,80,2,0.85) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.25s;
+  display: flex; align-items: flex-end; padding: 1rem;
+}
+.g-item:hover .g-overlay { opacity: 1; }
+.g-overlay span {
+  color: white; font-weight: 700;
+  font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+}
+
+.g-label-always {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(232,80,2,0.15) 0%, transparent 100%);
+  color: rgba(100,40,0,0.6); font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 10px 14px; text-align: center;
+}
+
+.ig-link {
+  text-align: center; margin-top: 2rem;
+  color: #999; font-size: 0.85rem;
+}
+.ig-link a { color: var(--orange); text-decoration: none; font-weight: 700; }
+.ig-link a:hover { text-decoration: underline; }
+
+/* ===== CONTACT ===== */
+#contacto {
+  padding: 110px 3rem;
+  background: var(--grad-section);
+  position: relative;
+}
+#contacto::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: var(--grad-brand);
+}
+
+.contact-grid { max-width: 1000px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+.contact-left h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 2.8rem; text-transform: uppercase;
+  letter-spacing: -0.5px; line-height: 1.05; margin-bottom: 2rem;
+}
+.contact-left h3 em {
+  font-style: normal;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.c-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 1.3rem; }
+.c-icon {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: rgba(232,80,2,0.12); border: 1px solid rgba(232,80,2,0.3);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.c-info strong { display: block; font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.c-info span { font-weight: 700; font-size: 0.95rem; color: var(--white); }
+
+.cta-stack { display: flex; flex-direction: column; gap: 1rem; }
+
+.cta-card {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1.3rem 1.5rem; border-radius: 8px;
+  text-decoration: none; border: 1px solid transparent;
+  transition: transform 0.15s, box-shadow 0.2s, filter 0.15s;
+}
+.cta-card:hover { transform: translateY(-3px); filter: brightness(1.07); }
+
+.cta-card.wa {
+  background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+  box-shadow: 0 4px 24px rgba(18,140,126,0.25);
+}
+.cta-card.wa:hover { box-shadow: 0 10px 40px rgba(18,140,126,0.4); }
+
+.cta-card.py {
+  background: linear-gradient(135deg, #D81D1D 0%, #FF4E00 100%);
+  box-shadow: 0 4px 24px rgba(232,80,2,0.25);
+}
+.cta-card.py:hover { box-shadow: 0 10px 40px rgba(232,80,2,0.4); }
+
+.cta-card.ig {
+  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
+  box-shadow: 0 4px 24px rgba(253,29,29,0.2);
+}
+.cta-card.ig:hover { box-shadow: 0 10px 40px rgba(253,29,29,0.35); }
+
+.cta-icon-wrap { font-size: 2.2rem; flex-shrink: 0; }
+.cta-text strong {
+  display: block; font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 1.5rem; text-transform: uppercase;
+  letter-spacing: 1px; color: white;
+}
+.cta-text span { font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #000;
+  border-top: 1px solid rgba(232,80,2,0.2);
+  padding: 3rem;
+  text-align: center;
+}
+.foot-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px;
+  background: var(--grad-btn);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block; margin-bottom: 0.5rem;
+}
+footer p { color: rgba(255,255,255,0.25); font-size: 0.82rem; line-height: 1.8; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  #inicio { padding: 110px 1.5rem 4rem; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-right {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .hero-badge-card {
+    min-width: 0;
+    flex: 1;
+    padding: 0.7rem 0.5rem;
+  }
+  .hero-badge-card .num { font-size: 1.3rem; }
+  .hero-badge-card .lbl { font-size: 0.55rem; letter-spacing: 1px; }
+  #menu, #galeria, #contacto, #por-que { padding: 80px 1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: 160px 160px 160px; }
+  .g-item.big { grid-column: span 2; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { padding: 2rem 1.5rem; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#inicio" class="nav-logo">🍔 La Buena Burger y Más</a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#por-que">Nosotros</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/56939120917?text=Hola!%20Quiero%20hacer%20un%20pedido" class="nav-cta" target="_blank">📲 Pedir ahora</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="inicio">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">📍 Melipilla, Chile</div>
+      <h1>
+        <span class="l1">La Buena</span>
+        <span class="l2">BURGER</span>
+        <span class="l3">Y MÁS</span>
+      </h1>
+      <p class="hero-desc">Las hamburguesas más brutales de Melipilla — pídelas por WhatsApp o encuéntranos en Pedidos Ya</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-main">🍔 Ver Menú</a>
+        <a href="https://wa.me/56939120917?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn-ghost" target="_blank">📲 Pedir ahora</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge-card">
+        <span class="num">100%</span>
+        <span class="lbl">Carne fresca</span>
+      </div>
+      <div class="hero-badge-card">
+        <span class="num">⚡</span>
+        <span class="lbl">Delivery rápido</span>
+      </div>
+      <div class="hero-badge-card">
+        <span class="num">🔥</span>
+        <span class="lbl">A la parrilla</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-bar"></div>
+
+<!-- ===== POR QUÉ NOSOTROS (white section) ===== -->
+<section id="por-que">
+  <div class="why-inner">
+    <div style="margin-bottom: 0.8rem;">
+      <div class="why-label">¿Por qué elegirnos?</div>
+    </div>
+    <h2 class="why-title">Lo que nos hace <span>diferentes</span></h2>
+    <p class="why-sub">En La Buena Burger no cortamos camino — cada ingrediente es fresco, cada burger se hace con cariño.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🥩</span>
+        <div class="why-card-title">Carne fresca</div>
+        <div class="why-card-desc">Sin congelados. La carne llega directo y se prepara al momento de tu pedido.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🔥</span>
+        <div class="why-card-title">A la parrilla</div>
+        <div class="why-card-desc">Cocinamos a fuego real para ese sabor ahumado que no se consigue de otra manera.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">⚡</span>
+        <div class="why-card-title">Delivery rápido</div>
+        <div class="why-card-desc">Pedís por WhatsApp o Pedidos Ya y lo tienes volando — sin esperas eternas.</div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">❤️</span>
+        <div class="why-card-title">Hecho con amor</div>
+        <div class="why-card-desc">Somos un emprendimiento familiar de Melipilla. Cada burger la hacemos como si fuera para nosotros.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-bar"></div>
+
+<!-- ===== MENÚ ===== -->
+<section id="menu">
+  <div class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-label">Nuestra carta</div>
+      <h2 class="sec-title">El Menú</h2>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- Hamburguesas -->
+      <div class="menu-card">
+        <div class="card-top">
+          <h3>Hamburguesas</h3>
+          <span class="card-top-icon">🍔</span>
+        </div>
+        <div class="card-body">
+          <div class="item">
+            <div>
+              <div class="item-name">La Buena Clásica <span class="hot">Top</span></div>
+              <div class="item-desc">Carne, lechuga, tomate, queso, salsa especial</div>
+            </div>
+            <div class="item-price">$4.990</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Doble Golpe</div>
+              <div class="item-desc">Doble carne, doble queso, tocino crujiente</div>
+            </div>
+            <div class="item-price">$6.990</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Mushroom Smash <span class="hot">Top</span></div>
+              <div class="item-desc">Carne smash, champiñones salteados, queso suizo</div>
+            </div>
+            <div class="item-price">$5.990</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">BBQ Monstruo</div>
+              <div class="item-desc">Salsa BBQ casera, cebolla caramelizada, tocino</div>
+            </div>
+            <div class="item-price">$6.490</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combos -->
+      <div class="menu-card">
+        <div class="card-top">
+          <h3>Combos</h3>
+          <span class="card-top-icon">🍟</span>
+        </div>
+        <div class="card-body">
+          <div class="item">
+            <div>
+              <div class="item-name">Combo Simple <span class="hot">Top</span></div>
+              <div class="item-desc">Burger clásica + papas fritas + bebida</div>
+            </div>
+            <div class="item-price">$6.490</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Combo Doble</div>
+              <div class="item-desc">Doble golpe + papas fritas + bebida</div>
+            </div>
+            <div class="item-price">$8.490</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Combo Familiar</div>
+              <div class="item-desc">2 burgers + papas familiares + 2 bebidas</div>
+            </div>
+            <div class="item-price">$14.990</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Combo Amigos</div>
+              <div class="item-desc">4 burgers clásicas + papas familiares</div>
+            </div>
+            <div class="item-price">$22.990</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acompañamientos -->
+      <div class="menu-card">
+        <div class="card-top">
+          <h3>Acompañamientos</h3>
+          <span class="card-top-icon">🥤</span>
+        </div>
+        <div class="card-body">
+          <div class="item">
+            <div>
+              <div class="item-name">Papas Fritas</div>
+              <div class="item-desc">Porción individual, recién fritas</div>
+            </div>
+            <div class="item-price">$1.990</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Papas Familiares</div>
+              <div class="item-desc">Porción grande para compartir</div>
+            </div>
+            <div class="item-price">$3.490</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Bebidas 350cc</div>
+              <div class="item-desc">Coca-Cola, Sprite, Fanta</div>
+            </div>
+            <div class="item-price">$1.490</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="item-name">Agua Mineral</div>
+              <div class="item-desc">500ml con o sin gas</div>
+            </div>
+            <div class="item-price">$990</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="menu-footer">
+      <p class="menu-note">⚠️ Precios referenciales — consulta las promos del día por WhatsApp</p>
+      <a href="https://wa.me/56939120917?text=Hola!%20Quiero%20el%20men%C3%BA%20completo" class="btn-main" target="_blank">📲 Menú completo por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<div class="grad-bar"></div>
+
+<!-- ===== GALERÍA ===== -->
+<section id="galeria">
+  <div class="sec-wrap" style="position:relative">
+    <div class="sec-head">
+      <div class="sec-label">Nuestra comida</div>
+      <h2 class="sec-title" style="background: linear-gradient(135deg, #111 0%, #E85002 60%, #F16001 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Galería</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="g-item big">
+        🍔
+        <div class="g-overlay"><span>La estrella de la casa</span></div>
+        <div class="g-label-always">Burger clásica</div>
+      </div>
+      <div class="g-item">
+        🍟
+        <div class="g-overlay"><span>Papas fritas</span></div>
+        <div class="g-label-always">Papas fritas</div>
+      </div>
+      <div class="g-item">
+        🥤
+        <div class="g-overlay"><span>Bebidas frías</span></div>
+        <div class="g-label-always">Bebidas</div>
+      </div>
+      <div class="g-item">
+        🔥
+        <div class="g-overlay"><span>A la parrilla</span></div>
+        <div class="g-label-always">Parrilla</div>
+      </div>
+      <div class="g-item">
+        🥓
+        <div class="g-overlay"><span>Con tocino</span></div>
+        <div class="g-label-always">Tocino</div>
+      </div>
+      <div class="g-item">
+        👨‍🍳
+        <div class="g-overlay"><span>Con amor</span></div>
+        <div class="g-label-always">Hecho a mano</div>
+      </div>
+    </div>
+
+    <p class="ig-link">📸 Síguenos en Instagram <a href="https://www.instagram.com/labuenaburgerymas" target="_blank">@labuenaburgerymas</a> para ver fotos reales y promociones</p>
+  </div>
+</section>
+
+<div class="grad-bar"></div>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contacto">
+  <div class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-label">Encuéntranos</div>
+      <h2 class="sec-title">Contacto</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h3>¡Pide ahora y<br>lo tienes <em>volando</em>!</h3>
+        <div class="c-row">
+          <div class="c-icon">📍</div>
+          <div class="c-info"><strong>Ubicación</strong><span>Melipilla, Región Metropolitana</span></div>
+        </div>
+        <div class="c-row">
+          <div class="c-icon">📱</div>
+          <div class="c-info"><strong>Teléfono / WhatsApp</strong><span>+56 9 3912 0917</span></div>
+        </div>
+        <div class="c-row">
+          <div class="c-icon">📸</div>
+          <div class="c-info"><strong>Instagram</strong><span>@labuenaburgerymas</span></div>
+        </div>
+        <div class="c-row">
+          <div class="c-icon">🕐</div>
+          <div class="c-info"><strong>Horario</strong><span>Consultar por WhatsApp</span></div>
+        </div>
+      </div>
+
+      <div class="cta-stack">
+        <a href="https://wa.me/56939120917?text=Hola!%20Quiero%20hacer%20un%20pedido" class="cta-card wa" target="_blank">
+          <div class="cta-icon-wrap">💬</div>
+          <div class="cta-text">
+            <strong>WhatsApp</strong>
+            <span>Pedido directo y rápido</span>
+          </div>
+        </a>
+        <a href="https://www.pedidosya.cl" class="cta-card py" target="_blank">
+          <div class="cta-icon-wrap">🛵</div>
+          <div class="cta-text">
+            <strong>Pedidos Ya</strong>
+            <span>Búscanos en la app</span>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/labuenaburgerymas" class="cta-card ig" target="_blank">
+          <div class="cta-icon-wrap">📸</div>
+          <div class="cta-text">
+            <strong>Instagram</strong>
+            <span>Promos y novedades</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <span class="foot-logo">🍔 La Buena Burger y Más</span>
+  <p>Melipilla, Región Metropolitana</p>
+  <p>+56 9 3912 0917 · @labuenaburgerymas</p>
+  <p style="margin-top: 1rem;">Hecho con fuego y amor 🔥</p>
+</footer>
+
+</body>
+</html>
